@@ -182,7 +182,7 @@ define KernelPackage/input-touchscreen-ads7846
 	CONFIG_TOUCHSCREEN_PROPERTIES=y \
 	CONFIG_TOUCHSCREEN_ADS7846
   FILES:=$(LINUX_DIR)/drivers/input/touchscreen/ads7846.ko \
-	$(LINUX_DIR)/drivers/input/touchscreen/of_touchscreen.ko
+	$(LINUX_DIR)/drivers/input/touchscreen/of_touchscreen.ko@ge5.4
   AUTOLOAD:=$(call AutoProbe,ads7846)
 endef
 

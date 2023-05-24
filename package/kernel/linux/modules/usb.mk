@@ -1652,7 +1652,8 @@ define KernelPackage/usb-chipidea
   FILES:= \
 	$(LINUX_DIR)/drivers/extcon/extcon-core.ko \
 	$(LINUX_DIR)/drivers/usb/chipidea/ci_hdrc.ko \
-	$(LINUX_DIR)/drivers/usb/common/ulpi.ko
+	$(LINUX_DIR)/drivers/usb/common/ulpi.ko \
+	$(LINUX_DIR)/drivers/usb/roles/roles.ko@ge5.0
   AUTOLOAD:=$(call AutoLoad,39,ci_hdrc,1)
   $(call AddDepends/usb)
 endef
