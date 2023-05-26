@@ -1,0 +1,13 @@
+# Copyright (C) 2015 OpenWrt.org
+# Copyright (C) 2023 Yousong Zhou <yszhou4tech@gmail.com>
+
+. /lib/functions/uci-defaults.sh
+
+board_config_update
+
+ucidef_add_switch "switch0" "0:lan" "1:lan" "2:lan" "3:lan" "4:lan" "5:lan" "6:lan" "7:lan" "9@eth3"
+ucidef_set_interfaces_lan_wan "eth0 eth2 eth3.1" "eth1"
+
+board_config_flush
+
+exit 0
