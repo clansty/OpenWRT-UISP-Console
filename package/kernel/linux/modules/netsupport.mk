@@ -61,7 +61,7 @@ $(eval $(call KernelPackage,bonding))
 define KernelPackage/udptunnel4
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=IPv4 UDP tunneling support
-  KCONFIG:=CONFIG_NET_UDP_TUNNEL
+  KCONFIG:=CONFIG_NET_UDP_TUNNEL CONFIG_VXLAN=m
   HIDDEN:=1
   FILES:=$(LINUX_DIR)/net/ipv4/udp_tunnel.ko
   AUTOLOAD:=$(call AutoLoad,32,udp_tunnel)
@@ -74,7 +74,7 @@ define KernelPackage/udptunnel6
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=IPv6 UDP tunneling support
   DEPENDS:=@IPV6
-  KCONFIG:=CONFIG_NET_UDP_TUNNEL
+  KCONFIG:=CONFIG_NET_UDP_TUNNEL CONFIG_VXLAN=m
   HIDDEN:=1
   FILES:=$(LINUX_DIR)/net/ipv6/ip6_udp_tunnel.ko
   AUTOLOAD:=$(call AutoLoad,32,ip6_udp_tunnel)
@@ -1394,32 +1394,6 @@ endef
 
 $(eval $(call KernelPackage,inet-diag))
 
-
-define KernelPackage/wireguard
-  SUBMENU:=$(NETWORK_SUPPORT_MENU)
-  TITLE:=WireGuard secure network tunnel
-  DEPENDS:= \
-	  +kmod-crypto-lib-chacha20poly1305 \
-	  +kmod-crypto-lib-curve25519 \
-	  +kmod-udptunnel4 \
-	  +IPV6:kmod-udptunnel6
-  KCONFIG:= \
-	  CONFIG_WIREGUARD \
-	  CONFIG_WIREGUARD_DEBUG=n
-  FILES:=$(LINUX_DIR)/drivers/net/wireguard/wireguard.ko
-  AUTOLOAD:=$(call AutoProbe,wireguard)
-endef
-
-define KernelPackage/wireguard/description
-  WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
-  state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
-  more useful than IPSec, while avoiding the massive headache. It intends to
-  be considerably more performant than OpenVPN.  WireGuard is designed as a
-  general purpose VPN for running on embedded interfaces and super computers
-  alike, fit for many different circumstances. It uses UDP.
-endef
-
-$(eval $(call KernelPackage,wireguard))
 
 
 define KernelPackage/netconsole
